@@ -1,0 +1,40 @@
+/* App.css */
+
+.navbar {
+  background: linear-gradient(to right, indigo, purple, pink);
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.navbar-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  max-width: 1200px;
+  margin-left: auto;
+}
+
+.nav-button {
+  background-color: white;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: background 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: #f0f0f0;
+}
