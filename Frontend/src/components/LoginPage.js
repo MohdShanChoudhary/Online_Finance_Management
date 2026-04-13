@@ -24,33 +24,40 @@ const LoginPage = ({ onLogin }) => {
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: '60px auto', padding: '30px', background: '#fff', borderRadius: '10px', boxShadow: '0 4px 16px rgba(0,0,0,0.1)' }}>
-      <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Login</h2>
+    <div className="card login-card">
+      <div className="card-header">
+        <div>
+          <h2 className="card-title">Secure Access</h2>
+          <p className="card-subtitle">Enter your credentials to continue with Money Laser.</p>
+        </div>
+      </div>
       <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '15px' }}>
-          <label style={{ display: 'block', marginBottom: '5px' }}>Username</label>
+        <div className="field">
+          <label className="field-label">Username</label>
           <input
+            className="input-field"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
           />
         </div>
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', marginBottom: '5px' }}>Password</label>
+        <div className="field">
+          <label className="field-label">Password</label>
           <input
+            className="input-field"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
           />
         </div>
-        {error && <div style={{ color: 'red', marginBottom: '15px' }}>{error}</div>}
-        <button type="submit" style={{ width: '100%', padding: '10px 0', background: '#4CAF50', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+
+        {error && <div className="page-note" style={{ color: '#e29585' }}>{error}</div>}
+
+        <button type="submit" className="button full-width" style={{ marginTop: '20px' }}>
           Login
         </button>
       </form>
-      <p style={{ marginTop: '15px', color: '#555', fontSize: '14px' }}>Enter the backend credentials to login.</p>
+      <p className="page-note">Use your backend credentials to authenticate.</p>
     </div>
   );
 };

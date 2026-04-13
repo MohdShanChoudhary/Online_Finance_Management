@@ -25,7 +25,7 @@ const UserList = () => {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this user?')) {
+    if (window.confirm('Are you sure you want to delete this record?')) {
       try {
         await axios.delete(`http://localhost:5000/api/users/${id}`);
         fetchUsers();
@@ -39,9 +39,8 @@ const UserList = () => {
     navigate(`/edit/${userId}`);
   };
 
-  const filteredUsers = filter === 'All' ? users : users.filter(user => user.transactionType === filter);
+  const filteredUsers = filter === 'All' ? users : users.filter((user) => user.transactionType === filter);
 
-  // Excel export function
   const exportToExcel = async () => {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Client List');
@@ -83,60 +82,71 @@ const UserList = () => {
   };
 
   return (
-    <div style={{ maxWidth: '95%', margin: '20px auto', padding: '20px', background: '#f2f2f2', borderRadius: '8px' }}>
-      <h2 style={{ textAlign: 'center' }}>Client List</h2>
+    <div className="card">
+      <div className="card-header">
+        <div>
+          <h2 className="card-title">Client Ledger</h2>
+          <p className="card-subtitle">A consistent money-themed dashboard for your client records with responsive layout.</p>
+        </div>
+      </div>
 
-      <label>Filter: </label>
-      <select onChange={(e) => setFilter(e.target.value)} value={filter}>
-        <option value="All">All</option>
-        <option value="Buy">Buy</option>
-        <option value="Sell">Sell</option>
-      </select>
+      <div className="actions-row">
+        <div className="filter-row">
+          <label className="field-label" htmlFor="filter">Filter</label>
+          <select id="filter" className="select-field" value={filter} onChange={(e) => setFilter(e.target.value)}>
+            <option value="All">All</option>
+            <option value="Buy">Buy</option>
+            <option value="Sell">Sell</option>
+          </select>
+        </div>
+        <button type="button" className="button secondary" onClick={exportToExcel}>Export to Excel</button>
+      </div>
 
-      <button
-        onClick={exportToExcel}
-        style={{ marginLeft: '15px', padding: '5px 15px', cursor: 'pointer' }}
-      >
-        Export to Excel
-      </button>
-
-      <table border="1" cellPadding="8" style={{ marginTop: '15px', width: '100%', background: '#fff' }}>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Type</th>
-            <th>Amount</th>
-            <th>Payable</th>
-            <th>Received</th>
-            <th>Pending</th>
-            <th>Remarks</th>
-            <th>Date</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredUsers.map((user) => (
-            <tr key={user._id}>
-              <td>{user.name}</td>
-              <td>{user.phone}</td>
-              <td>{user.email}</td>
-              <td>{user.transactionType}</td>
-              <td>{user.amount}</td>
-              <td>{user.payableAmount || '-'}</td>
-              <td>{user.receivedAmount || '-'}</td>
-              <td>{user.pendingAmount}</td>
-              <td>{user.remarks}</td>
-              <td>{new Date(user.date).toLocaleDateString()}</td>
-              <td>
-                <button onClick={() => handleEdit(user._id)}>Edit</button>
-                <button onClick={() => handleDelete(user._id)} style={{ marginLeft: '5px' }}>Delete</button>
-              </td>
+      <div className="table-wrapper">
+        <table className="data-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Payable</th>
+              <th>Received</th>
+              <th>Pending</th>
+              <th>Remarks</th>
+              <th>Date</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredUsers.length === 0 ? (
+              <tr>
+                <td colSpan="11" className="no-data">No clients available. Add a client to begin.</td>
+              </tr>
+            ) : (
+              filteredUsers.map((user) => (
+                <tr key={user._id}>
+                  <td>{user.name}</td>
+                  <td>{user.phone}</td>
+                  <td>{user.email}</td>
+                  <td>{user.transactionType}</td>
+                  <td>{user.amount}</td>
+                  <td>{user.payableAmount || '-'}</td>
+                  <td>{user.receivedAmount || '-'}</td>
+                  <td>{user.pendingAmount}</td>
+                  <td>{user.remarks}</td>
+                  <td>{new Date(user.date).toLocaleDateString()}</td>
+                  <td>
+                    <button type="button" className="button secondary" onClick={() => handleEdit(user._id)}>Edit</button>
+                    <button type="button" className="button danger" onClick={() => handleDelete(user._id)}>Delete</button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

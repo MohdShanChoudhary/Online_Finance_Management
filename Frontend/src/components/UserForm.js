@@ -60,174 +60,77 @@ const UserForm = ({ initialData = null, onSubmit, onCancel }) => {
         await onSubmit(formData);
       } else {
         await axios.post('http://localhost:5000/api/users', formData);
-        alert("✅ Client added successfully!");
+        alert('Client added successfully!');
         navigate('/users');
       }
     } catch (error) {
-      alert(error.response?.data?.message || "❌ Submission failed");
+      alert(error.response?.data?.message || 'Submission failed');
       console.error(error);
     }
   };
 
-  const styles = {
-    container: {
-      maxWidth: '500px',
-      margin: '30px auto',
-      padding: '30px',
-      borderRadius: '12px',
-      backgroundColor: '#f4f4f4',
-      boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-      fontFamily: 'Arial, sans-serif'
-    },
-    heading: {
-      textAlign: 'center',
-      marginBottom: '20px',
-      color: '#333'
-    },
-    input: {
-      width: '100%',
-      padding: '10px',
-      marginBottom: '15px',
-      borderRadius: '6px',
-      border: '1px solid #ccc',
-      fontSize: '16px'
-    },
-    textarea: {
-      width: '100%',
-      padding: '10px',
-      height: '80px',
-      borderRadius: '6px',
-      border: '1px solid #ccc',
-      fontSize: '16px',
-      marginBottom: '15px'
-    },
-    radioGroup: {
-      marginBottom: '15px',
-      display: 'flex',
-      justifyContent: 'center',
-      gap: '20px'
-    },
-    submitBtn: {
-      width: '100%',
-      padding: '10px',
-      backgroundColor: '#007bff',
-      color: 'white',
-      fontSize: '16px',
-      border: 'none',
-      borderRadius: '6px',
-      cursor: 'pointer'
-    }
-  };
-
   return (
-    <div style={styles.container}>
-      <h2 style={styles.heading}>{initialData ? 'Edit Client' : 'Client Detail Entry'}</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Client Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          style={styles.input}
-        />
-        <input
-          type="text"
-          name="phone"
-          placeholder="Phone Number"
-          value={formData.phone}
-          onChange={handleChange}
-          required
-          style={styles.input}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          style={styles.input}
-        />
+    <div className="card">
+      <div className="card-header">
+        <div>
+          <h2 className="card-title">{initialData ? 'Edit Client' : 'Client Entry'}</h2>
+          <p className="card-subtitle">Capture the account details with precision and a consistent money theme.</p>
+        </div>
+      </div>
 
-        <div style={styles.radioGroup}>
-          <label>
-            <input
-              type="radio"
-              name="transactionType"
-              value="Buy"
-              checked={formData.transactionType === 'Buy'}
-              onChange={handleChange}
-            /> Buy
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="transactionType"
-              value="Sell"
-              checked={formData.transactionType === 'Sell'}
-              onChange={handleChange}
-            /> Sell
-          </label>
+      <form onSubmit={handleSubmit}>
+        <div className="form-grid">
+          <div className="field">
+            <label className="field-label">Client Name</label>
+            <input className="input-field" type="text" name="name" value={formData.name} onChange={handleChange} required />
+          </div>
+          <div className="field">
+            <label className="field-label">Phone Number</label>
+            <input className="input-field" type="text" name="phone" value={formData.phone} onChange={handleChange} required />
+          </div>
+          <div className="field">
+            <label className="field-label">Email</label>
+            <input className="input-field" type="email" name="email" value={formData.email} onChange={handleChange} required />
+          </div>
+          <div className="field">
+            <label className="field-label">Transaction Type</label>
+            <select className="select-field" name="transactionType" value={formData.transactionType} onChange={handleChange}>
+              <option value="Buy">Buy</option>
+              <option value="Sell">Sell</option>
+            </select>
+          </div>
+          <div className="field">
+            <label className="field-label">Amount</label>
+            <input className="input-field" type="number" name="amount" value={formData.amount} onChange={handleChange} required />
+          </div>
+          {formData.transactionType === 'Buy' ? (
+            <div className="field">
+              <label className="field-label">Payable Amount</label>
+              <input className="input-field" type="number" name="payableAmount" value={formData.payableAmount} onChange={handleChange} />
+            </div>
+          ) : (
+            <div className="field">
+              <label className="field-label">Received Amount</label>
+              <input className="input-field" type="number" name="receivedAmount" value={formData.receivedAmount} onChange={handleChange} />
+            </div>
+          )}
+          <div className="field">
+            <label className="field-label">Pending Amount</label>
+            <input className="input-field" type="number" name="pendingAmount" value={formData.pendingAmount} readOnly />
+          </div>
         </div>
 
-        <input
-          type="number"
-          name="amount"
-          placeholder="Amount (₹)"
-          value={formData.amount}
-          onChange={handleChange}
-          required
-          style={styles.input}
-        />
+        <div className="field" style={{ marginTop: '22px' }}>
+          <label className="field-label">Remarks</label>
+          <textarea className="textarea-field" name="remarks" value={formData.remarks} onChange={handleChange} />
+        </div>
 
-        {formData.transactionType === 'Buy' ? (
-          <input
-            type="number"
-            name="payableAmount"
-            placeholder="Payable Amount"
-            value={formData.payableAmount}
-            onChange={handleChange}
-            style={styles.input}
-          />
-        ) : (
-          <input
-            type="number"
-            name="receivedAmount"
-            placeholder="Received Amount"
-            value={formData.receivedAmount}
-            onChange={handleChange}
-            style={styles.input}
-          />
-        )}
-
-        <input
-          type="number"
-          name="pendingAmount"
-          placeholder="Pending Amount"
-          value={formData.pendingAmount}
-          readOnly
-          style={{ ...styles.input, backgroundColor: '#e9ecef' }}
-        />
-
-        <textarea
-          name="remarks"
-          placeholder="Remarks"
-          value={formData.remarks}
-          onChange={handleChange}
-          style={styles.textarea}
-        />
-
-        <button type="submit" style={styles.submitBtn}>
-          {initialData ? 'Update' : 'Submit'}
-        </button>
-
-        {onCancel && (
-          <button type="button" onClick={onCancel} style={{ ...styles.submitBtn, backgroundColor: '#dc3545', marginTop: '10px' }}>
-            Cancel
-          </button>
-        )}
+        <div className="actions-row" style={{ marginTop: '26px' }}>
+          <button type="submit" className="button">{initialData ? 'Update Client' : 'Save Client'}</button>
+          {onCancel && (
+            <button type="button" className="button secondary" onClick={onCancel}>Cancel</button>
+          )}
+        </div>
       </form>
     </div>
   );
