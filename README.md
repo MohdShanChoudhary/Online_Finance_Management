@@ -1,101 +1,337 @@
-## This project was made with the help of AI (ChatGPT).
+<div align="center">
 
-🔰 I only have basic to mid-level knowledge of HTML and CSS, and very little experience with React. Even though I didn’t know MERN stack properly, I was able to build this entire project with the help of ChatGPT — including backend APIs, frontend forms, MongoDB integration, and Excel export features.
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0F6E56&height=200&section=header&text=Finance+Manager&fontSize=72&fontColor=E1F5EE&animation=fadeIn&fontAlignY=38&desc=Full-Stack+MERN+%E2%80%A2+JWT+Auth+%E2%80%A2+Excel+Export&descAlignY=60&descColor=9FE1CB" width="100%"/>
 
-💡 This shows that I have a strong ability to learn new things quickly. Even without knowing the full stack at the beginning, I created a working project that can actually be used in the real world for managing client transactions.
+<br/>
 
-This was my first time building a full-stack app, and I learned a lot throughout the process. With the right mindset and support tools like AI, anything is possible — even for beginners.
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=1000&color=1D9E75&center=true&vCenter=true&width=600&lines=Manage+client+Buy+%2F+Sell+transactions;Track+pending+payments+in+real-time;Export+financial+records+to+Excel;Secured+with+JWT+authentication" />
 
+<br/><br/>
 
+<img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+<img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" />
+<img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" />
+<img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" />
+<img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white" />
+<img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" />
+<img src="https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=black" />
 
+<br/><br/>
 
+<a href="https://online-finance-management.vercel.app/">
+  <img src="https://img.shields.io/badge/Live%20Demo-0F6E56?style=for-the-badge&logo=vercel&logoColor=white" />
+</a>
+&nbsp;
+<a href="https://github.com/MohdShanChoudhary">
+  <img src="https://img.shields.io/badge/Source%20Code-181717?style=for-the-badge&logo=github&logoColor=white" />
+</a>
 
-##  Money Management System
-
-A simple and powerful money management web app for tracking Buy/Sell transactions of clients. Built using the **MERN (MongoDB, Express.js, React.js, Node.js)** stack.
-
----
-
-## 📌 Features
-
-- 🧾 Add/Edit/Delete client transactions (Buy/Sell)
-- 🔍 Filter clients by transaction type (Buy/Sell)
-- 🗂️ Store Name, Phone, Amount, Paid, Pending, Remarks
-- 📤 Export client data to Excel
-- ☁️ MongoDB database for persistent storage
-- 💻 Responsive and clean UI with React
-
----
-
-## ⚙️ How It Works
-
-1. User fills a form to add a Buy or Sell entry.
-2. Data is stored in MongoDB via Node.js Express API.
-3. Users can:
-   - Filter by Buy/Sell
-   - Edit client data using the same form
-   - Delete client entry
-   - Export the table to Excel file
-4. Unique client name ensures data integrity.
----
-## 📤 Export to Excel
-We use the xlsx library in the frontend to convert the table data into an Excel sheet and trigger download.
-
----
-###### 🏁 Run the App
-
-### 🖥️ 1. Start the Backend Server
-
-1. Open terminal and go to the backend folder:
-   ```bash
-   cd backend
-   ```
-
-2. Install required packages:
-   ```bash
-   npm install
-   ```
-
-3. Create a `.env` file and add your MongoDB URI and port:
-   ```env
-   MONGO_URI=your_mongodb_connection_string
-   PORT=5000
-   ```
-
-4. Start the backend server using nodemon:
-   ```bash
-   npx nodemon index.js
-   ```
-
-5. If everything is correct, your terminal will show:
-   ```bash
-   ✅ Connected to MongoDB
-   🚀 Server running on http://localhost:5000
-   ```
+</div>
 
 ---
 
-### 🌐 2. Start the Frontend (React App)
+## Overview
 
-1. Open a **new terminal window or tab**
+**Online Finance Management** is a full-stack MERN application built for a single authenticated admin to manage client Buy/Sell transactions, track pending payments, and export financial records to Excel. All data is stored securely in MongoDB Atlas and synced in real-time.
 
-2. Go to the frontend folder:
-   ```bash
-   cd frontend
-   ```
+---
 
-3. Install frontend dependencies (first time only):
-   ```bash
-   npm install
-   ```
+## Features
 
-4. Start the React development server:
-   ```bash
-   npm start
-   ```
+| Feature | Description |
+|---------|-------------|
+| Add / Edit / Delete | Full CRUD for client transactions |
+| Buy / Sell tracking | Filter records by transaction type |
+| Pending amount | Automatic calculation per client |
+| Excel export | Download records via `exceljs` |
+| JWT authentication | Secure admin login |
+| MongoDB Atlas | Cloud database, always available |
+| Responsive UI | Works on desktop and mobile |
 
-5. The app will be available at:
-   ```bash
-   🌐 http://localhost:3000
-   ```
+---
 
+## Project Structure
+
+```
+Online_Finance_Management/
+│
+├── server/                   # Backend
+│   ├── index.js              # Express app entry point
+│   ├── routes/               # API route handlers
+│   ├── models/               # Mongoose schemas
+│   ├── middleware/           # JWT auth middleware
+│   └── .env                  # Config (never upload this)
+│
+├── Frontend/                 # Frontend
+│   ├── src/
+│   │   ├── pages/            # Login, Dashboard, Transactions
+│   │   ├── components/       # Reusable UI components
+│   │   └── App.js            # Routes
+│   └── package.json
+│
+└── README.md
+```
+
+---
+
+## Architecture
+
+```
+┌───────────────────────────────────────────────┐
+│             React Frontend (Vercel)           │
+│                                               │
+│   Login Page ──── Dashboard ──── Export       │
+│        │               │                     │
+│    Axios (HTTP)    Axios (HTTP)               │
+└────────┼───────────────┼─────────────────────┘
+         │               │
+         ▼               ▼
+┌───────────────────────────────────────────────┐
+│           Node.js + Express (Render)          │
+│                                               │
+│   POST /api/login     ← JWT issued here       │
+│   GET  /api/records   ← protected route       │
+│   POST /api/records   ← add transaction       │
+│   PUT  /api/records/:id                       │
+│   DELETE /api/records/:id                     │
+│   GET  /api/export    ← Excel download        │
+│                                               │
+│   JWT Middleware validates every request      │
+└───────────────────────┬───────────────────────┘
+                        │
+                        ▼
+         ┌──────────────────────────┐
+         │     MongoDB Atlas        │
+         │  - transactions          │
+         │  - client records        │
+         │  - pending amounts       │
+         └──────────────────────────┘
+```
+
+---
+
+## Data Flow
+
+```
+1. Admin logs in with username + password
+         │
+         ▼
+2. Backend validates credentials from .env
+   Issues a signed JWT token
+         │
+         ▼
+3. Frontend stores token, attaches to all requests
+         │
+         ▼
+4. Backend middleware verifies token on every call
+         │
+         ▼
+5. Validated requests hit MongoDB Atlas
+   Data returned and rendered in UI
+         │
+         ▼
+6. Admin clicks Export → ExcelJS generates
+   .xlsx file → downloaded to browser
+```
+
+---
+
+## Login Credentials
+
+> Default admin credentials (stored in `server/.env`):
+
+```
+Username : admin
+Password : password123
+```
+
+These map to `ADMIN_USERNAME` and `ADMIN_PASSWORD` in your `.env` file.
+
+> **Important:** Change `JWT_SECRET` before going to production.
+
+---
+
+## Backend Setup
+
+**Step 1** — Navigate to server folder
+
+```bash
+cd server
+```
+
+**Step 2** — Install dependencies
+
+```bash
+npm install
+```
+
+**Step 3** — Create `.env` file
+
+```env
+MONGO_URI=mongodb+srv://username:password@cluster0.mongodb.net/moneyDB?retryWrites=true&w=majority
+
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=password123
+
+JWT_SECRET=super_secure_random_secret_12345
+```
+
+> Never upload `.env` to GitHub. Add it to `.gitignore`.
+
+**Step 4** — Start backend
+
+```bash
+node index.js
+```
+
+Runs on: `http://localhost:5000`
+
+---
+
+## Frontend Setup
+
+**Step 1** — Navigate to frontend folder
+
+```bash
+cd Frontend
+```
+
+**Step 2** — Install dependencies
+
+```bash
+npm install
+```
+
+**Step 3** — Start app
+
+```bash
+npm start
+```
+
+Open: `http://localhost:3000`
+
+---
+
+## API Connection
+
+| Environment | URL |
+|-------------|-----|
+| Local | `http://localhost:5000` |
+| Production | `https://online-finance-management.onrender.com` |
+
+Update the base URL in your Axios config or a `.env` variable:
+
+```env
+REACT_APP_API_URL=http://localhost:5000
+```
+
+---
+
+## Excel Export
+
+Implemented using [`exceljs`](https://www.npmjs.com/package/exceljs):
+
+- Backend generates `.xlsx` from MongoDB records
+- Sent as a file download response
+- Triggered from a single button in the UI
+- Includes all transaction fields: client name, type, amount, date, pending
+
+---
+
+## Deployment
+
+| Layer | Platform |
+|-------|----------|
+| Frontend | Vercel |
+| Backend | Render |
+| Database | MongoDB Atlas |
+
+**Deployment flow:**
+
+```
+GitHub push
+    │
+    ├── Vercel picks up Frontend/ → builds React → live URL
+    │
+    └── Render picks up server/ → runs Node.js → API URL
+```
+
+---
+
+## Local vs Production
+
+| Config | Local | Production |
+|--------|-------|------------|
+| API URL | `http://localhost:5000` | `https://your-app.onrender.com` |
+| WebSocket | — | — |
+| Database | MongoDB Atlas | MongoDB Atlas (same) |
+| Frontend port | `localhost:3000` | Vercel URL |
+
+---
+
+## Notes
+
+- Render free tier **sleeps after inactivity** — first request may take 30–50 sec
+- Always keep `.env` out of version control
+- Rotate `JWT_SECRET` before sharing the repo publicly
+- MongoDB Atlas free tier has a 512MB storage limit
+
+---
+
+## Technologies Used
+
+**Frontend**
+```
+React.js          → UI framework
+React Router      → Client-side routing
+Axios             → HTTP requests
+```
+
+**Backend**
+```
+Node.js           → Runtime
+Express.js        → Web framework
+Mongoose          → MongoDB ODM
+JSON Web Token    → Authentication
+ExcelJS           → Excel file generation
+```
+
+**Infrastructure**
+```
+MongoDB Atlas     → Cloud database
+Vercel            → Frontend hosting
+Render            → Backend hosting
+```
+
+---
+
+## Learning Highlights
+
+- Built a complete MERN stack application end-to-end
+- Implemented JWT-based authentication from scratch
+- Connected React frontend to Express backend via Axios
+- Used MongoDB Atlas for cloud-hosted data storage
+- Generated downloadable Excel files from live data
+- Deployed a full-stack app across Vercel + Render
+
+---
+
+## Author
+
+**Mohd Shan Choudhary**
+
+<a href="https://github.com/MohdShanChoudhary">
+  <img src="https://img.shields.io/badge/GitHub-MohdShanChoudhary-181717?style=flat-square&logo=github" />
+</a>
+
+---
+
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0F6E56&height=100&section=footer" width="100%"/>
+
+<img src="https://img.shields.io/badge/Built%20with-MERN%20Stack-1D9E75?style=flat-square" />
+&nbsp;
+<img src="https://img.shields.io/github/stars/MohdShanChoudhary/online-finance-management?style=social" />
+
+</div>
